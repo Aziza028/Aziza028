@@ -9,7 +9,6 @@
             <div class="card mb-3" style="width: full">
               <div class="card-body">
                 <h5 class="card-title">{{ object.username }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ object.present_address }}</h6>
                 <div class="row">
                   <div class="col">
                     <p> Phone number:{{ object.phone_number }}</p>
@@ -32,6 +31,14 @@
                   </div>
                   <div class="col">
                     <p>age: {{ object.age }}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p> Address: {{ object.present_address }}</p>
+                  </div>
+                  <div class="col">
+                    <p>Bloog Group: {{ object.blood_group }}</p>
                   </div>
                 </div>
               </div>

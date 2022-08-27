@@ -6,13 +6,14 @@ from posts.models import Post
 from posts.forms import PostForm
 from app.models import User
 
+
 class PostCreateAndListView(LoginRequiredMixin, generic.CreateView, generic.ListView):
     model = Post
     form_class = PostForm
-    context_object_name = 'posts'
-    template_name = 'post/list.html'
-    success_url = reverse_lazy('posts')
-    
+    context_object_name = "posts"
+    template_name = "post/list.html"
+    success_url = reverse_lazy("posts")
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(PostCreateAndListView, self).form_valid(form)
@@ -20,18 +21,23 @@ class PostCreateAndListView(LoginRequiredMixin, generic.CreateView, generic.List
 
 class PostDetailview(LoginRequiredMixin, generic.DetailView):
     model = Post
-    template_name = 'post/detail.html'
-
+    template_name = "post/detail.html"
 
 
 class ProfileListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'profile/list.html'
+    template_name = "profile/list.html"
     model = User
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
+        query = self.request.GET.get("q")
+        print(query)
         if query:
-            object_list = self.model.objects.filter(Q(phone_number__icontains=query) | Q(present_address__icontains=query) )
+            object_list = self.model.objects.filter(
+                Q(phone_number__icontains=query)
+                | Q(present_address__icontains=query)
+                | Q(blood_group__icontains=query)
+            )
+            return object_list
         else:
-            object_list = self.model.objects.none()
-        return object_list
+            # object_list = self.model.objects.none()
+            return self.model.objects.none()

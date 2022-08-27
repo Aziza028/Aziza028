@@ -6,18 +6,31 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
-GENDERS = [
+GENDERS = (
     ("M", "Male"),
     ("F", "Female"),
-]
-OCCUPATIONS = [
+)
+
+OCCUPATIONS = (
     ("Student", "Student"),
     ("Doctor", "Doctor"),
     ("Engineer", "Engineer"),
-]
+)
+
+BLOOD_GROUPS = (
+    ("A+", "A+"),
+    ("A-", "A-"),
+    ("B+", "B+"),
+    ("B-", "B-"),
+    ("AB+", "AB+"),
+    ("AB-", "AB-"),
+    ("O+", "O+"),
+    ("O-", "O-"),
+)
 
 
 class User(AbstractUser):
+    blood_group = models.CharField(max_length=20, choices=BLOOD_GROUPS)
     gender = models.CharField(max_length=1, choices=GENDERS)
     occupation = models.CharField(max_length=20, choices=OCCUPATIONS)
     workplace = models.CharField(max_length=1024, null=True, blank=True)
@@ -25,7 +38,6 @@ class User(AbstractUser):
     phone_number = PhoneNumberField()
     present_address = models.CharField(max_length=100)
     permanent_address = models.CharField(max_length=100)
-
     last_blood_donation_date = models.DateField(null=True)
 
     @property

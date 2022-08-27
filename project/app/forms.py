@@ -33,6 +33,7 @@ class UserRegistrationForm(forms.ModelForm):
             "first_name",
             "last_name",
             "email",
+            'blood_group',
             "gender",
             "phone_number",
             "password",
@@ -88,6 +89,7 @@ class UserProfileForm(forms.ModelForm):
 
         # Add class
         self.fields["gender"].widget.attrs = {"class": "form-select"}
+        self.fields['blood_group'].widget.attrs = {"class": "form-select"}
         self.fields["occupation"].widget.attrs = {"class": "form-select"}
 
         self.fields["workplace"].widget.attrs.update(
@@ -122,6 +124,7 @@ class UserProfileForm(forms.ModelForm):
         fields = [
             "first_name",
             "last_name",
+            'blood_group',
             "phone_number",
             "password",
             "present_address",

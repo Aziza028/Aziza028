@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from app.models import User
 
 
 class CustomUserAdmin(UserAdmin):
-    model = get_user_model()
+    model = User
 
     list_display = (
         "username",
@@ -69,6 +69,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "gender",
+                    "blood_group",
                     "occupation",
                     "workplace",
                     "age",
@@ -82,4 +83,4 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
-admin.site.register(get_user_model(), CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin)
